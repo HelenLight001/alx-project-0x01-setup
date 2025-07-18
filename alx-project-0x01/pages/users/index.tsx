@@ -1,20 +1,24 @@
-// pages/users/index.tsx
-
 import React from "react";
-import {UserProps} from "@/interfaces";
+import Header from "@/components/layout/Header";
 import UserCard from "@/components/common/UserCard";
+import {UserProps} from "@/interfaces";
 
-const Users: React.FC<{posts: UserProps[]}> = ({posts}) => {
+interface UsersPageProps {
+  posts: UserProps[];
+}
+
+const Users: React.FC<UsersPageProps> = ({posts}) => {
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <h1 className="text-3xl font-bold text-center text-blue-800 mb-10">
-        Users List
-      </h1>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((user) => (
-          <UserCard key={user.id} user={user} />
-        ))}
-      </div>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="p-4">
+        <h1 className="text-2xl font-semibold mb-4">User Profiles</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {posts.map((user) => (
+            <UserCard key={user.id} {...user} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 };

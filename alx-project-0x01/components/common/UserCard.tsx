@@ -1,36 +1,28 @@
-// components/common/UserCard.tsx
-
 import React from "react";
-import {UserProps} from "../../interfaces"; // ✅ required import
+import {UserProps} from "@/interfaces";
 
-const UserCard: React.FC<{user: UserProps}> = ({user}) => {
-  // ✅ <UserProps> usage here
+const UserCard: React.FC<UserProps> = ({
+  id,
+  name,
+  username,
+  email,
+  phone,
+  website,
+  address,
+  company,
+}) => {
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: 10,
-        padding: 16,
-        marginBottom: 16,
-      }}
-    >
-      <h2>
-        {user.name} (@{user.username})
-      </h2>
-      <p>
-        <strong>Email:</strong> {user.email}
+    <div className="max-w-md mx-auto my-4 p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+      <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
+      <p className="text-sm text-gray-600">@{username}</p>
+      <p className="mt-2 text-gray-700">📧 {email}</p>
+      <p className="text-gray-700">📞 {phone}</p>
+      <p className="text-gray-700">🌐 {website}</p>
+      <p className="text-gray-700 mt-2">
+        🏠 {address.street}, {address.city}
       </p>
-      <p>
-        <strong>Phone:</strong> {user.phone}
-      </p>
-      <p>
-        <strong>Website:</strong> {user.website}
-      </p>
-      <p>
-        <strong>Company:</strong> {user.company.name}
-      </p>
-      <p>
-        <strong>Address:</strong> {user.address.street}, {user.address.city}
+      <p className="text-gray-700 mt-2">
+        🏢 {company.name} - <i>{company.catchPhrase}</i>
       </p>
     </div>
   );
