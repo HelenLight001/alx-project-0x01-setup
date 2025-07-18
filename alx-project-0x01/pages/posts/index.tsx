@@ -1,7 +1,7 @@
 // pages/posts/index.tsx
 import PostCard from "@/components/common/PostCard";
 import Header from "@/components/layout/Header";
-import {PostProps} from "@/interfaces";
+import {PostProps} from "@/interfaces"; // import { PostProps } from "@/interfaces";
 
 interface PostsPageProps {
   posts: PostProps[];
