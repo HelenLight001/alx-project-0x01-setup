@@ -1,13 +1,14 @@
 // pages/posts/index.tsx
 import PostCard from "@/components/common/PostCard";
 import Header from "@/components/layout/Header";
-import {PostProps} from "../../components/interfaces";
+import {PostProps} from "@/interfaces";
 
 interface PostsPageProps {
   posts: PostProps[];
 }
 
 const Posts: React.FC<PostsPageProps> = ({posts}) => {
+  console.log(posts);
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
