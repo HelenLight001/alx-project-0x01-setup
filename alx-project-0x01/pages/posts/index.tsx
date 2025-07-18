@@ -8,7 +8,6 @@ interface PostsPageProps {
 }
 
 const Posts: React.FC<PostsPageProps> = ({posts}) => {
-  console.log(posts);
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
