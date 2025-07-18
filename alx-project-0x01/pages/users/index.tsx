@@ -1,36 +1,46 @@
-import React from "react";
-import Header from "@/components/layout/Header";
-import UserCard from "@/components/common/UserCard";
-import {UserProps} from "@/interfaces";
+import React, {useState} from "react";
+import {GetStaticProps} from "next";
+import {UserData} from "../../interfaces";
+import UserCard from "../../components/common/UserCard";
+import UserModal from "../../components/common/UserModal";
+
 interface UsersPageProps {
-  posts: UserProps[];
+  posts: UserData[];
 }
 
 const Users: React.FC<UsersPageProps> = ({posts}) => {
+  const [users, setUsers] = useState<UserData[]>(posts);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddUser = (newUser: UserData) => {
+    setUsers([newUser, ...users]);
+  };
+
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <main className="p-4">
-        <h1 className="text-2xl font-semibold mb-4">User Profiles</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts.map((user) => (
-            <UserCard key={user.id} {...user} />
-          ))}
-        </div>
-      </main>
+    <div style={{padding: "20px"}}>
+      <h1>Users List</h1>
+      <button onClick={() => setIsModalOpen(true)}>Add User</button>
+      <UserModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddUser={handleAddUser}
+      />
+      {users.map((user) => (
+        <UserCard key={user.id} user={user} />
+      ))}
     </div>
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const posts = await response.json();
+  const posts: UserData[] = await response.json();
 
   return {
     props: {
       posts,
     },
   };
-}
+};
 
 export default Users;
