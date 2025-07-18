@@ -1,13 +1,17 @@
 // components/common/UserCard.tsx
 
 import React from "react";
-import {UserProps} from "../../interfaces";
+import {UserProps} from "../../interfaces"; // ✅ this fixes the import error
 
-interface Props {
-  user: UserProps;
-}
-
-const UserCard: React.FC<Props> = ({user}) => {
+const UserCard: React.FC<UserProps> = ({
+  name,
+  username,
+  email,
+  phone,
+  website,
+  company,
+  address,
+}) => {
   return (
     <div
       style={{
@@ -18,22 +22,22 @@ const UserCard: React.FC<Props> = ({user}) => {
       }}
     >
       <h2>
-        {user.name} (@{user.username})
+        {name} (@{username})
       </h2>
       <p>
-        <strong>Email:</strong> {user.email}
+        <strong>Email:</strong> {email}
       </p>
       <p>
-        <strong>Phone:</strong> {user.phone}
+        <strong>Phone:</strong> {phone}
       </p>
       <p>
-        <strong>Website:</strong> {user.website}
+        <strong>Website:</strong> {website}
       </p>
       <p>
-        <strong>Company:</strong> {user.company.name}
+        <strong>Company:</strong> {company.name}
       </p>
       <p>
-        <strong>Address:</strong> {user.address.street}, {user.address.city}
+        <strong>Address:</strong> {address.street}, {address.city}
       </p>
     </div>
   );
